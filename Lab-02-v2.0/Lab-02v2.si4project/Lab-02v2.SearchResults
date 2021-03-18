@@ -1,0 +1,8 @@
+---- cpio_strcpy Matches (2 in 1 files) ----
+cpio.c (src) line 60 : static char* cpio_strcpy(char *to, const char *from) {
+cpio_ls in cpio.c (src) :         //cpio_strcpy(buf[i],  current_filename);
+---- cpio_info Matches (6 in 2 files) ----
+cpio.c (src) line 168 : int cpio_info(void *archive, struct cpio_info *info) {
+cpio.h (include) line 30 : struct cpio_info {
+cpio.h (include) line 44 :  *                     reported by cpio_info.
+cpio.h (include) line 67 : int cpio_info(void *archive, struct cpio_info *info);

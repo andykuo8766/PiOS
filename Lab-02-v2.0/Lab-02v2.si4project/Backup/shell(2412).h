@@ -1,0 +1,30 @@
+#ifndef SHELL_H
+#define SHELL_H
+
+#define MAX_BUFFER_LEN 128
+
+#define  USER_NAME     "andy"
+#define  MACHINE_NAME  "pi"
+
+#define CHAIN_LOADING_ADDRESS ((char *)0x100000)
+#define CPIO_LOADING_ADDRESS  ((char *)0x8000000)
+
+enum SPECIAL_CHARACTER
+{
+    BACK_SPACE = 8,
+    LINE_FEED = 10,
+    CARRIAGE_RETURN = 13,
+    
+    
+    REGULAR_INPUT = 1000,
+    NEW_LINE = 1001,
+    
+    UNKNOWN = -1,
+
+};
+
+void shell_start () ;
+enum SPECIAL_CHARACTER parse ( char );
+void command_controller ( enum SPECIAL_CHARACTER, char c, char [], int *);
+int read_command(char *buff, unsigned int size);
+#endif
