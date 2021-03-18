@@ -1,0 +1,4 @@
+---- CHAIN_LOADING_ADDRESS Matches (3 in 2 files) ----
+command_controller in shell.c (src) : 			else if ( !strcmp(buffer, "loadimg"      ) ) copy_current_kernel_and_jump(CHAIN_LOADING_ADDRESS);
+shell.c (uart_boot\src) line 7 : #define CHAIN_LOADING_ADDRESS ((char *)0x8000)
+command_controller in shell.c (uart_boot\src) : 			else if ( !strcmp(buffer, "kernel"      ) ) copy_current_kernel_and_jump(CHAIN_LOADING_ADDRESS);
