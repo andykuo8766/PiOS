@@ -1,9 +1,5 @@
 #include "system.h"
 
-
-extern char __cpio_addr [];
-
-
 struct cmd{
     char input[20];
     char description[30];
@@ -15,11 +11,9 @@ struct cmd cmd_list[SYS_CMD_NUM] = {
     {.input = "hello", .description="Print hello world."},
     {.input = "reset", .description="Reset raspi3."},
     {.input = "loadimg", .description="Load new kernel."},
-    {.input = "ls", .description="List rootfs"},
-    {.input = "cat", .description="Show content of file"},
-    {.input = "dtb_ls",. description="List device tree"},
-    {.input = "dtb_cat",. description="Parse device tree"}
 };
+
+
 
 void system_command(char* buf){
     char *args = buf;
@@ -37,10 +31,6 @@ void system_command(char* buf){
 	else if(strcmp(buf, "hello") == 0)		hello();
 	else if(strcmp(buf, "reset") == 0)		reset(100);
     else if(strcmp(buf, "loadimg") == 0)	loadimg();
-    else if(strcmp(buf, "ls") == 0)   		cpio_list();
-	else if(strcmp(buf, "cat") == 0)   		cpio_cat(args);
-	else if(strcmp(buf, "dtb_ls") == 0)   	print_dt_info();
-	else if(strcmp(buf, "dtb_cat") == 0)   	parse_dt();
 }
 
 void help(){
@@ -53,7 +43,6 @@ void help(){
         uart_puts("\r\n");
     }
 	uart_puts("###########################################\r\n\n\r");
-    
 }
 
 void hello(){
