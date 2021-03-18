@@ -1,0 +1,12 @@
+---- uart_read_int Matches (2 in 2 files) ----
+uart.c (src) line 103 : int uart_read_int() {
+uart.h (include) line 38 : int uart_read_int();
+---- uart_send_int Matches (2 in 2 files) ----
+uart.c (src) line 104 : void uart_send_int(int number) {
+uart.h (include) line 40 : void uart_send_int(int number);
+---- uart_hex Matches (2 in 2 files) ----
+uart.c (src) line 107 : void uart_hex(unsigned int d) {
+uart.h (include) line 39 : void uart_hex(unsigned int d) ;
+---- strset Matches (2 in 2 files) ----
+string.c (src) line 54 : void strset (char * s1, int c, int size ){
+string.h (include) line 5 : void strset (char * s1, int c, int size );

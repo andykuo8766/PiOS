@@ -1,0 +1,3 @@
+---- branch_to_address Matches (2 in 1 files) ----
+start.S (src) line 24 : .global branch_to_address
+start.S (src) line 25 : branch_to_address:

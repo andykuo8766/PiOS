@@ -1,0 +1,49 @@
+SRCDIR 		= src
+INCLUDE_DIR = include
+LIB_DIR 	= lib
+LIB_HEADER	= lib/headers
+
+
+SRCS = $(wildcard $(SRCDIR)/*.c )
+OBJS = $(patsubst $(SRCDIR)/%.c, %.o, $(SRCS))
+LINK_SCRIPT = linker.ld
+
+CFLAGS = -Wall -O0 -ffreestanding -nostdinc -nostdlib -nostartfiles -g 
+#CFLAGS = -fPIC -Wall -nostdlib -nostartfiles -ffreestanding -Iinclude -mgeneral-regs-only
+
+CC = aarch64-linux-gnu-gcc
+LINKER = aarch64-linux-gnu-ld
+OBJ_CPY = aarch64-linux-gnu-objcopy
+EMULATOR	= qemu-system-aarch64
+
+VPATH = $(SRCDIR)
+vpath %.c %.S $(SRCDIR) 
+
+all:  kernel8.img
+
+clean:
+	rm kernel8.elf kernel8.img *.o  *.d>/dev/null 2>/dev/null || true
+	
+start.o: start.S
+	$(CC) $(CFLAGS)  -c $< -o $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
+
+kernel8.img: start.o  $(OBJS)
+	$(LINKER) -nostdlib -nostartfiles start.o  $(OBJS) -T $(LINK_SCRIPT) -o kernel8.elf
+	$(OBJ_CPY) -O binary kernel8.elf $@
+
+cpio: rootfs/*
+	find rootfs/* | cpio -o -H newc > ramdisk
+	
+
+rd.o: ramdisk
+	$(LINKER) -r -b binary -o rd.o ramdisk
+
+run:
+	$(EMULATOR) -M raspi3 -kernel kernel8.img -serial null -serial stdio
+
+
+run_cpio:
+	$(EMULATOR) -M raspi3 -kernel kernel8.img -serial null -serial stdio -initrd ramdisk	
